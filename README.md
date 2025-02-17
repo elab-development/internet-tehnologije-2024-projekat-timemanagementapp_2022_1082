@@ -1,4 +1,4 @@
-# ⏳ Veb platforma za upravljanje sopstvenim vremenom
+# ⏳ Veb platforma za upravljanje sopstvenim vremenom DOMAĆI
 
 ## 📌 Opis
 **Veb platforma za upravljanje sopstvenim vremenom** omogućava korisnicima da efikasno planiraju, prate i optimizuju svoje dnevne aktivnosti.
@@ -12,29 +12,10 @@
 ---
 
 ## 🛠 Tehnologije
-🔹 **Frontend:** 
-🔹 **Backend:** 
-🔹 **Baza podataka:**  
-🔹 **Autentifikacija:** 
+🔹 **Frontend:** React.js
+🔹 **Backend:** Laravel
+🔹 **Baza podataka:**  MySQL
 
 ---
 
-## 🚀 Pokretanje projekta
-### 1️⃣ Kloniranje repozitorijuma
-```bash
- git clone https://github.com/your-repo-link.git
- cd your-repo-folder
-```
-
-### 2️⃣ Instalacija zavisnosti
-```bash
- npm install
-```
-
-### 3️⃣ Pokretanje aplikacije
-```bash
- npm start
-```
-
----
 
