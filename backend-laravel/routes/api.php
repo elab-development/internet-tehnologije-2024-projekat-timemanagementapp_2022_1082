@@ -31,3 +31,7 @@ Route::middleware(['auth:sanctum'])->post('logout', [AuthController::class, 'log
 // POST /api/register - Za registraciju korisnika, potrebno je poslati name, email, password, i password_confirmation.
 // POST /api/login - Za prijavu korisnika, potrebno je poslati email i password.
 // POST /api/logout - Za odjavu korisnika, treba poslati Authorization header sa tokenom koji je dobijen prilikom login-a.
+
+Route::middleware(['auth:sanctum'])->post('tasks', [TaskController::class, 'store']);  // Za CREATE
+Route::middleware(['auth:sanctum'])->put('tasks/{task}', [TaskController::class, 'update']);  // Za UPDATE
+Route::middleware(['auth:sanctum'])->delete('tasks/{task}', [TaskController::class, 'destroy']);  // Za DELETE

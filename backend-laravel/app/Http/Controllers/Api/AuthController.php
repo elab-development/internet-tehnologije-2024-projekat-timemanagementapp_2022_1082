@@ -28,7 +28,7 @@ class AuthController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        $token = $user->createToken('YourAppName')->plainTextToken;
+        $token = $user->createToken('API Token')->plainTextToken;
 
         return response()->json(['user' => $user, 'token' => $token], 201);
     }
@@ -50,7 +50,7 @@ class AuthController extends Controller
             return response()->json(['message' => 'Invalid credentials'], 401);
         }
 
-        $token = $user->createToken('YourAppName')->plainTextToken;
+        $token = $user->createToken('API Token')->plainTextToken;
 
         return response()->json(['user' => $user, 'token' => $token]);
     }
