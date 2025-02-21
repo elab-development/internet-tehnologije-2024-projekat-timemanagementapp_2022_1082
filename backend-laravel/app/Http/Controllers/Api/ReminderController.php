@@ -39,5 +39,7 @@ class ReminderController extends Controller
         $reminder->delete();
         return response()->noContent();
     }
+
+
 }
 

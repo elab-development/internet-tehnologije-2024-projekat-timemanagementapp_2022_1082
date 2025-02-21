@@ -39,4 +39,22 @@ class TaskController extends Controller
         $task->delete();
         return response()->noContent();
     }
+
+    public function assignTask(Request $request)
+    {
+        $task = Task::findOrFail($request->task_id);
+        $task->user_id = $request->user_id;
+        $task->save();
+
+        return response()->json(['message' => 'Task assigned successfully']);
+    }
+
+    public function updateStatus(Request $request, $id)
+    {
+        $task = Task::findOrFail($id);
+        $task->status = $request->status;
+        $task->save();
+    
+        return response()->json(['message' => 'Task status updated successfully']);
+    }
 }
