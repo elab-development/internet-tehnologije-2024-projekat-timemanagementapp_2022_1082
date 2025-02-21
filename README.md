@@ -1,4 +1,6 @@
-# ⏳ Veb platforma za upravljanje sopstvenim vremenom DOMAĆI
+  DOMAĆI & SEMINARSKI
+# ⏳ Veb platforma za upravljanje sopstvenim vremenom 
+
 
 ## 📌 Opis
 **Veb platforma za upravljanje sopstvenim vremenom** omogućava korisnicima da efikasno planiraju, prate i optimizuju svoje dnevne aktivnosti.
