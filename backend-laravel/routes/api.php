@@ -22,7 +22,6 @@ Route::post('assign-task', [TaskController::class, 'assignTask']);
 Route::put('tasks/{id}/update-status', [TaskController::class, 'updateStatus']);
 
 // Auth
-
 Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
 
