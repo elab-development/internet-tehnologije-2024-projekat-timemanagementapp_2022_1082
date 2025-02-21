@@ -15,7 +15,7 @@ return new class extends Migration {
             $table->enum('priority', ['low', 'medium', 'high'])->default('medium');
             $table->dateTime('deadline')->nullable();
             $table->string('forDeleting'); // Tu je samo da bi se izbrisala
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('app_user_id')->constrained('app_users')->onDelete('cascade');
             $table->foreignId('project_id')->nullable()->constrained()->onDelete('cascade');
             $table->timestamps();
         });
