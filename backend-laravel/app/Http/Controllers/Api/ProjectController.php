@@ -39,5 +39,11 @@ class ProjectController extends Controller
         $project->delete();
         return response()->noContent();
     }
+
+    public function getUserProjects($userId)
+    {
+        $projects = Project::where('app_user_id', $userId)->get();
+        return response()->json($projects);
+    }
 }
 
