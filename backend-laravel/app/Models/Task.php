@@ -9,11 +9,11 @@ class Task extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'description', 'status', 'priority', 'deadline', 'user_id', 'project_id', 'forDeleting'];
+    protected $fillable = ['title', 'description', 'status', 'priority', 'deadline', 'app_user_id', 'project_id', 'forDeleting'];
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(AppUser::class);
     }
 
     public function project()

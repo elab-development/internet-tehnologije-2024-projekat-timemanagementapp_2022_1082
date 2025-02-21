@@ -9,7 +9,7 @@ class TimeEntry extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['task_id', 'user_id', 'start_time', 'end_time', 'duration'];
+    protected $fillable = ['task_id', 'app_user_id', 'start_time', 'end_time', 'duration'];
 
     public function task()
     {
@@ -18,6 +18,6 @@ class TimeEntry extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(AppUser::class);
     }
 }
