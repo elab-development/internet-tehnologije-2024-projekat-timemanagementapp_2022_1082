@@ -12,6 +12,7 @@ class Task extends Model
     protected $fillable = [
         'name',
         'description',
+        'for_delete', // samo za brisanje
         'user_id',
         'category_id'
     ];
