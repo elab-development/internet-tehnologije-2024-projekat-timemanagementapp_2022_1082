@@ -3,6 +3,9 @@
 namespace Database\Factories;
 
 use App\Models\TimeEntry;
+use App\Models\Task;
+use App\Models\User;
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class TimeEntryFactory extends Factory
@@ -12,9 +15,10 @@ class TimeEntryFactory extends Factory
     public function definition()
     {
         return [
-            'task_id' => \App\Models\Task::factory(),
-            'time_spent' => $this->faker->numberBetween(30, 120),  // in minutes
-            'entry_date' => $this->faker->dateTimeThisMonth(),
+            'task_id' => Task::factory(),
+            'user_id' => User::factory(),
+            'category_id' => Category::factory(),
+            'hours' => $this->faker->numberBetween(1, 8),
         ];
     }
 }
