@@ -42,7 +42,7 @@ const Stats: React.FC = () => {
 
             <div className="flex-1 flex items-center justify-center p-8">
                 <div className="bg-white rounded-2xl shadow-lg p-12 text-center max-w-2xl">
-                    <h2 className="text-3xl font-bold text-blue-600 mb-4">Stranica trenutno nije u Funkciji</h2>
+                    <h2 className="text-3xl font-bold text-red-800 mb-4">Stranica trenutno nije u funkciji.</h2>
                     <p className="text-xl text-gray-600 mb-6">Coming Soon...</p>
                 </div>
             </div>

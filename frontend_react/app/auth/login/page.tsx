@@ -10,7 +10,7 @@ const Login = () => {
   const [error, setError] = useState('');
 
   const handleLogin = () => {
-    if (email === 'user@example.com' && password === 'password123') {
+    if (email === 'user@example.com' && password === 'password123' || email === 'admin' && password === 'admin') {
       localStorage.setItem('user', JSON.stringify({ email }));
       router.push('/home');
     } else {
