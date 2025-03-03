@@ -1,8 +1,8 @@
 "use client";
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import IconCard from '../../components/IconCard';
-
+import AnimatedWave from '../../components/AnimatedWave';
 
 const Home: React.FC = () => {
   // SVG ikonice
@@ -61,122 +61,179 @@ const Home: React.FC = () => {
 
   // Linkovi za vertikalnu navigaciju
   const navLinks = [
-    { text: "Početna", href: "/" },
-    { text: "Dashboard", href: "/dashboard" },
+    { text: "Početna", href: "/home" },
     { text: "Zadaci", href: "/tasks" },
     { text: "Kalendar", href: "/calendar" },
-    { text: "Statistika", href: "/stats" },
-    { text: "Podešavanja", href: "/settings" }
+    { text: "Analitika", href: "/stats" },
   ];
 
-  return (
-    <div className="flex min-h-screen rounded-2xl bg-gray-50">
-      {/* Vertikalni NavBar - leva strana */}
-      <aside className="w-64 bg-white shadow-md">
-        <div className="p-6">
-          <h1 className="text-2xl text-center font-bold text-blue-600">TimeFlow</h1>
-        </div>
-        <nav className="mt-6">
-          <ul>
-            {navLinks.map((link, index) => (
-              <li key={index} >
-                <a 
-                  href={link.href} 
-                  className="flex px-6 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors duration-200"
-                >
-                  {link.text}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </nav>
-      </aside>
+  const [selectedEmoji, setSelectedEmoji] = useState("👋");
+  const [selectedSize, setSelectedSize] = useState(28);
+  const [selectedSpeed, setSelectedSpeed] = useState(1000);
 
-      {/* Glavni sadržaj - desna strana */}
-      <main className="flex-1 p-8">
-        <h2 className="text-2xl font-semibold text-center text-gray-800 mb-6">Dobrodošo/la u TimeFlow</h2>
-        
-        {/* Horizontalni containeri za statistiku */}
-        <div className="bg-[#785aff] p-4 rounded-2xl mb-4">
-            <div className="flex gap-6 justify-center items-center">
-                {/* Završeni zadaci */}
-                <div className="flex flex-col bg-white rounded-lg p-6">
-                    <h3 className="text-lg font-medium text-center text-gray-900 mb-3">Završeni zadaci</h3>
-                    <div className="w-full bg-gray-200 rounded-full h-4.5">
-                        <div className="bg-green-500 h-4.5 rounded-full" style={{ width: '50%' }}></div>
-                    </div>
-                    <p className="mt-3 text-2xl text-center font-semibold text-gray-800">11 Zadataka</p>
-                </div>
+    // Stanja za animaciju
+    const [progress1, setProgress1] = useState(0); // Završeni zadaci (0% do 50%)
+    const [progress2, setProgress2] = useState(0); // Produktivnost (0% do 78%)
+    const [count, setCount] = useState(0); // Brojač od 0 do 23
+  
+    // Efekti za animaciju
+    useEffect(() => {
+      // Animacija za prvi loader (Završeni zadaci)
+      const interval1 = setInterval(() => {
+        setProgress1((prev) => (prev < 50 ? prev + 1 : prev));
+      }, 30); // Brzina animacije
+  
+      // Animacija za drugi loader (Produktivnost)
+      const interval2 = setInterval(() => {
+        setProgress2((prev) => (prev < 78 ? prev + 1 : prev));
+      }, 20); // Brzina animacije
+  
+      // Animacija za brojač (0 do 23)
+      const interval3 = setInterval(() => {
+        setCount((prev) => (prev < 23 ? prev + 1 : prev));
+      }, 80); // Brzina animacije
+  
+      // Čišćenje intervala
+      return () => {
+        clearInterval(interval1);
+        clearInterval(interval2);
+        clearInterval(interval3);
+      };
+    }, []);
 
-                {/* Ukupno zadataka */}
-                <div className="flex flex-col bg-white rounded-lg shadow-md p-6">
-                    <h3 className="text-lg font-medium text-center text-gray-900 mb-3">Ukupno zadataka</h3>
-                    <p className="mt-2 text-2xl text-center font-semibold text-gray-800">23 Zadataka</p>
-                </div>
-
-                {/* Produktivnost */}
-                <div className="flex flex-col bg-white rounded-lg shadow-md p-6">
-                    <h3 className="text-lg font-medium text-center text-gray-900 mb-3">Produktivnost</h3>
-                    <div className="w-full bg-gray-200 rounded-full h-4.5">
-                        <div className="bg-blue-600 h-4.5 rounded-full" style={{ width: '78%' }}></div>
-                    </div>
-                    <p className="mt-3 text-2xl text-center font-semibold text-gray-800">76% - 79%</p>
-                </div>
+    return (
+        <div className="flex min-h-screen rounded-2xl bg-gradient-to-br from-gray-50 to-gray-100">
+          {/* Vertikalni NavBar - leva strana */}
+          <aside className="w-64 bg-white shadow-lg rounded-r-2xl">
+            <div className="p-6">
+              <h1 className="text-2xl text-center font-bold text-blue-600">TimeFlow</h1>
             </div>
-        </div>
+            <nav className="mt-6">
+              <ul>
+                {navLinks.map((link, index) => (
+                  <li key={index}>
+                    <a
+                      href={link.href}
+                      className="flex px-6 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors duration-200 rounded-lg mx-2"
+                    >
+                      {link.text}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          </aside>
+    
+          {/* Glavni sadržaj - desna strana */}
+          <main className="flex-1 p-8">
+            <div className="flex flex-row justify-center items-center space-x-1">
+              <h2 className="text-2xl font-semibold text-gray-800">Dobrodošo/la [Ime korisnika]</h2>
+              <div className="">
+                <AnimatedWave emoji={selectedEmoji} size={selectedSize} wavingSpeed={selectedSpeed} />
+              </div>
+            </div>
+    
+            {/* Horizontalni containeri za statistiku */}
+            <div className="bg-gradient-to-r from-blue-600 to-blue-700 p-4 rounded-xl shadow-lg mb-6">
+              <div className="flex flex-wrap gap-4 justify-center items-stretch">
+                {/* Završeni zadaci */}
+                <div className="flex flex-col bg-white rounded-xl p-6 shadow-md flex-1 min-w-64 transition-all duration-300 hover:shadow-xl hover:transform hover:scale-105">
+                  <h3 className="text-md font-semibold text-center text-gray-800 mb-4">Završeni zadaci</h3>
+                  <div className="w-full bg-gray-100 rounded-full h-3 mb-2">
+                    <div
+                      className="bg-gradient-to-r from-green-400 to-green-600 h-3 rounded-full transition-all duration-500 ease-in-out"
+                      style={{ width: `${progress1}%` }}
+                    ></div>
+                  </div>
+                  <div className="flex items-center justify-between mt-1">
+                    <span className="text-xs text-gray-500">0%</span>
+                    <span className="text-xs text-gray-500">100%</span>
+                  </div>
+                  <p className="mt-4 text-xl text-center font-bold text-gray-800">11 Zadataka</p>
+                </div>
+    
+                {/* Ukupno zadataka */}
+                <div className="flex flex-col bg-white rounded-xl p-6 shadow-md flex-1 min-w-64 transition-all duration-300 hover:shadow-xl hover:transform hover:scale-105 relative overflow-hidden">
+                  <div className="absolute -top-10 -right-10 w-16 h-16 bg-blue-100 rounded-full opacity-20"></div>
+                  <h3 className="text-md font-semibold text-center text-gray-800 mb-2">Ukupno zadataka</h3>
+                  <div className="flex justify-center items-center flex-grow">
+                    <p className="text-4xl font-bold text-blue-600">{count}</p>
+                  </div>
+                  <p className="text-center text-gray-600 mt-2">Zadataka ukupno</p>
+                </div>
+    
+                {/* Produktivnost */}
+                <div className="flex flex-col bg-white rounded-xl p-4 shadow-md flex-1 min-w-64 transition-all duration-300 hover:shadow-xl hover:transform hover:scale-105">
+                    <h3 className="text-md font-semibold text-center text-gray-800 mb-2">Produktivnost</h3>
+                    <div className="relative pt-1">
+                        <div className="w-full bg-gray-100 rounded-full h-3 mb-2">
+                        <div
+                            className="bg-gradient-to-r from-blue-400 to-blue-600 h-3 rounded-full transition-all duration-500 ease-in-out"
+                            style={{ width: `${progress2}%` }}
+                        ></div>
+                        </div>
+                        <div className="flex items-center justify-between">
+                        <span className="text-xs text-gray-500">0%</span>
+                        <span className="text-xs text-gray-500">78%</span>
+                        <span className="text-xs text-gray-500">100%</span>
+                        </div>
+                    </div>
+                    <p className="mt-2 text-xl text-center font-bold text-gray-800">76% - 79%</p>
+                    <p className="text-center text-green-500 text-xs mt-1">+2.3% od prošle nedelje</p>
+                    </div>
+              </div>
+            </div>
+    
+            {/* Prva grupa kartica - korišćenje Card komponente */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+              <IconCard
+                icon={<CalendarIcon />}
+                title="Planiranje"
+                text="Efikasno planirajte svoje vreme i zadatke u intuitivnom kalendaru"
+                className="text-center hover:transform hover:scale-105 transition-transform duration-300"
+              />
+{/*     
+              <IconCard
+                icon={<ClockIcon />}
+                title="Praćenje vremena"
+                text="Pratite kako trošite svoje vreme i optimizujte svoju produktivnost"
+                className="text-center hover:transform hover:scale-105 transition-transform duration-300"
+              />
+    
+              <IconCard
+                icon={<ChartIcon />}
+                title="Analitika"
+                text="Dobijte detaljan uvid u svoju produktivnost kroz grafikone i izveštaje"
+                className="text-center hover:transform hover:scale-105 transition-transform duration-300"
+              /> */}
+            </div>
+    
+            {/* Druga grupa kartica - korišćenje Card komponente */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <IconCard
+                icon={<NotesIcon />}
+                title="Beleške"
+                text="Organizujte svoje beleške i ideje na jednom mestu"
+                className="text-center hover:transform hover:scale-105 transition-transform duration-300"
+              />
+              {/* <IconCard
+                icon={<TeamIcon />}
+                title="Saradnja"
+                text="Delite zadatke i sarađujte sa članovima vašeg tima"
+                className="text-center hover:transform hover:scale-105 transition-transform duration-300"
+              />
+    
+              <IconCard
+                icon={<ReportIcon />}
+                title="Izveštaji"
+                text="Kreirajte detaljne izveštaje o vašoj produktivnosti i napretku"
+                className="text-center hover:transform hover:scale-105 transition-transform duration-300"
+              /> */}
+            </div>
 
-
-        
-        {/* Prva grupa kartica - korišćenje Card komponente */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          <IconCard
-            icon={<CalendarIcon />}
-            title="Planiranje"
-            text="Efikasno planirajte svoje vreme i zadatke u intuitivnom kalendaru"
-            className="text-center"
-          />
-          
-          <IconCard
-            icon={<ClockIcon />}
-            title="Praćenje vremena"
-            text="Pratite kako trošite svoje vreme i optimizujte svoju produktivnost"
-            className="text-center"
-          />
-          
-          <IconCard
-            icon={<ChartIcon />}
-            title="Analitika"
-            text="Dobijte detaljan uvid u svoju produktivnost kroz grafikone i izveštaje"
-            className="text-center"
-          />
+          </main>
         </div>
-        
-        {/* Druga grupa kartica - korišćenje Card komponente */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <IconCard
-            icon={<NotesIcon />}
-            title="Beleške"
-            text="Organizujte svoje beleške i ideje na jednom mestu"
-            className="text-center"
-          />
-          
-          <IconCard
-            icon={<TeamIcon />}
-            title="Saradnja"
-            text="Delite zadatke i sarađujte sa članovima vašeg tima"
-            className="text-center"
-          />
-          
-          <IconCard
-            icon={<ReportIcon />}
-            title="Izveštaji"
-            text="Kreirajte detaljne izveštaje o vašoj produktivnosti i napretku"
-            className="text-center"
-          />
-        </div>
-      </main>
-    </div>
-  );
+      );
 };
 
 export default Home;

@@ -24,7 +24,7 @@ const IconCard: React.FC<IconCardProps> = ({
     >
       <div className="flex flex-col items-center justify-center space-x-3">
         {icon && (
-          <div className="flex-shrink-0 text-[#785aff]">
+          <div className="flex-shrink-0 text-blue-600">
             {icon}
           </div>
         )}

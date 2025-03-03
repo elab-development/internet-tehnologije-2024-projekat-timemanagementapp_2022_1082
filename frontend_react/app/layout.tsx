@@ -10,7 +10,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
   return (
     <html lang="sr">
       <body className="bg-gray-100">
-        <div className="container mx-auto p-8">
+        <div className="container mx-auto p-12">
           {children}
         </div>
       </body>

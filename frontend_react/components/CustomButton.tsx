@@ -1,16 +1,17 @@
 "use client";
 
-import React from 'react';
+import React, { ReactNode } from 'react';
 
 interface CustomButtonProps {
   title: string;
-  color?: 'primary' | 'secondary' | 'success' | 'danger' | 'warning';
+  color?: 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'primary-dark' | 'secondary-dark' | 'success-dark' | 'danger-dark' | 'warning-dark';
   size?: 'small' | 'medium' | 'large';
   onClick?: () => void;
   fullWidth?: boolean;
   disabled?: boolean;
   type?: 'button' | 'submit' | 'reset';
   className?: string;
+  children?: ReactNode; // Dodato svojstvo za decu komponentu
 }
 
 const CustomButton: React.FC<CustomButtonProps> = ({
@@ -22,14 +23,22 @@ const CustomButton: React.FC<CustomButtonProps> = ({
   disabled = false,
   type = 'button',
   className = '',
+  children, // Dodato svojstvo za decu komponentu
 }) => {
-  // Mapiranje boja
+  // Mapiranje boja - regularno i za tamnu temu
   const colorClasses = {
     primary: 'bg-blue-600 hover:bg-blue-700 text-white',
     secondary: 'bg-gray-600 hover:bg-gray-700 text-white',
     success: 'bg-green-600 hover:bg-green-700 text-white',
     danger: 'bg-red-600 hover:bg-red-700 text-white',
-    warning: 'bg-yellow-500 hover:bg-yellow-600 text-white'
+    warning: 'bg-yellow-500 hover:bg-yellow-600 text-white',
+    
+    // Boje za tamnu temu
+    'primary-dark': 'bg-blue-700 hover:bg-blue-800 text-white',
+    'secondary-dark': 'bg-gray-700 hover:bg-gray-800 text-white',
+    'success-dark': 'bg-green-700 hover:bg-green-800 text-white',
+    'danger-dark': 'bg-red-700 hover:bg-red-800 text-white',
+    'warning-dark': 'bg-yellow-600 hover:bg-yellow-700 text-white'
   };
 
   // Mapiranje veličina
@@ -56,7 +65,7 @@ const CustomButton: React.FC<CustomButtonProps> = ({
       onClick={onClick}
       disabled={disabled}
     >
-      {title}
+      {children || title}
     </button>
   );
 };
