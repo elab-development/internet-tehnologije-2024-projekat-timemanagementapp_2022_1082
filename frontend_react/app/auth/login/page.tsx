@@ -12,7 +12,7 @@ const Login = () => {
   const handleLogin = () => {
     if (email === 'user@example.com' && password === 'password123') {
       localStorage.setItem('user', JSON.stringify({ email }));
-      router.push('/dashboard');
+      router.push('/home');
     } else {
       setError('Pogrešan email ili lozinka.');
     }
@@ -29,7 +29,7 @@ const Login = () => {
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full p-2 mt-2 border border-gray-300 rounded"
+            className="w-full p-2 mt-2 border text-gray-800 border-gray-300 rounded"
           />
         </div>
         <div className="mt-4">
@@ -38,12 +38,12 @@ const Login = () => {
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full p-2 mt-2 border border-gray-300 rounded"
+            className="w-full p-2 mt-2 border text-gray-800 border-gray-300 rounded"
           />
         </div>
         <button
           onClick={handleLogin}
-          className="w-full bg-blue-500 text-white p-2 mt-6 rounded hover:bg-blue-600"
+          className="w-full bg-blue-500 text-white p-2 mt-6 rounded hover:bg-blue-600 hover:cursor-pointer"
         >
           Prijavi se
         </button>

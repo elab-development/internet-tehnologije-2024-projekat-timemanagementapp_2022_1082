@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 
 const Home: React.FC = () => {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-blue-50 to-white">
+    <div className="flex flex-col rounded-2xl items-center justify-center min-h-screen bg-gradient-to-b from-blue-50 to-white">
       <motion.div 
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}

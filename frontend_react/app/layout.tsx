@@ -9,8 +9,8 @@ export const metadata = {
 const Layout = ({ children }: { children: ReactNode }) => {
   return (
     <html lang="sr">
-      <body className="bg-gray-100 rounded-2xl">
-        <div className="container mx-auto p-4">
+      <body className="bg-gray-100">
+        <div className="container mx-auto p-8">
           {children}
         </div>
       </body>

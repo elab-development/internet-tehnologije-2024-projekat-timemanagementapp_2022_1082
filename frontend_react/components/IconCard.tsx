@@ -19,12 +19,12 @@ const IconCard: React.FC<IconCardProps> = ({
 }) => {
   return (
     <div 
-      className={`bg-white rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow duration-200 ${onClick ? 'cursor-pointer' : ''} ${className}`}
+      className={`bg-white rounded-lg shadow-md p-4 hover:shadow-lg hover:bg-gray-200 hover:cursor-pointer transition-shadow duration-200 ${onClick ? 'cursor-pointer' : ''} ${className}`}
       onClick={onClick}
     >
-      <div className="flex items-start space-x-3">
+      <div className="flex flex-col items-center justify-center space-x-3">
         {icon && (
-          <div className="flex-shrink-0 text-blue-600">
+          <div className="flex-shrink-0 text-[#785aff]">
             {icon}
           </div>
         )}
