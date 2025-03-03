@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import IconCard from '../../components/IconCard';
 import AnimatedWave from '../../components/AnimatedWave';
+import Task from '@/components/Task';
 
 const Home: React.FC = () => {
   // SVG ikonice
@@ -15,21 +16,6 @@ const Home: React.FC = () => {
     </svg>
   );
 
-  const ClockIcon = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-10 h-10 mb-2">
-      <circle cx="12" cy="12" r="10" />
-      <polyline points="12 6 12 12 16 14" />
-    </svg>
-  );
-
-  const ChartIcon = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-10 h-10 mb-2">
-      <line x1="18" y1="20" x2="18" y2="10" />
-      <line x1="12" y1="20" x2="12" y2="4" />
-      <line x1="6" y1="20" x2="6" y2="14" />
-    </svg>
-  );
-
   const NotesIcon = () => (
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-10 h-10 mb-2">
       <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
@@ -37,25 +23,6 @@ const Home: React.FC = () => {
       <line x1="16" y1="13" x2="8" y2="13" />
       <line x1="16" y1="17" x2="8" y2="17" />
       <line x1="10" y1="9" x2="8" y2="9" />
-    </svg>
-  );
-
-  const TeamIcon = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-10 h-10 mb-2">
-      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-      <circle cx="9" cy="7" r="4" />
-      <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-      <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-    </svg>
-  );
-
-  const ReportIcon = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-10 h-10 mb-2">
-      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-      <polyline points="14 2 14 8 20 8" />
-      <path d="M16 13H8" />
-      <path d="M16 17H8" />
-      <path d="M10 9H8" />
     </svg>
   );
 
@@ -184,52 +151,47 @@ const Home: React.FC = () => {
               </div>
             </div>
     
-            {/* Prva grupa kartica - korišćenje Card komponente */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-              <IconCard
+        <div className="flex flex-col md:flex-row gap-6 mb-2">
+        {/* Leva strana - dve kartice sa manjom širinom */}
+            <div className="grid grid-rows-1 md:grid-rows-2 gap-6 max-w-[260px] max-h-[400px]"> {/* Ograničena širina */}
+                <IconCard
                 icon={<CalendarIcon />}
-                title="Planiranje"
-                text="Efikasno planirajte svoje vreme i zadatke u intuitivnom kalendaru"
+                title="Kalendar"
+                text="Efikasno planirajte svoje vreme i zadatke u intuitivnom kalendaru."
                 className="text-center hover:transform hover:scale-105 transition-transform duration-300"
-              />
-{/*     
-              <IconCard
-                icon={<ClockIcon />}
-                title="Praćenje vremena"
-                text="Pratite kako trošite svoje vreme i optimizujte svoju produktivnost"
-                className="text-center hover:transform hover:scale-105 transition-transform duration-300"
-              />
-    
-              <IconCard
-                icon={<ChartIcon />}
-                title="Analitika"
-                text="Dobijte detaljan uvid u svoju produktivnost kroz grafikone i izveštaje"
-                className="text-center hover:transform hover:scale-105 transition-transform duration-300"
-              /> */}
-            </div>
-    
-            {/* Druga grupa kartica - korišćenje Card komponente */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <IconCard
+                />
+                <IconCard
                 icon={<NotesIcon />}
-                title="Beleške"
-                text="Organizujte svoje beleške i ideje na jednom mestu"
+                title="TODO Lista"
+                text="Organizujte svoje zadatke i ideje na jednom mestu."
                 className="text-center hover:transform hover:scale-105 transition-transform duration-300"
-              />
-              {/* <IconCard
-                icon={<TeamIcon />}
-                title="Saradnja"
-                text="Delite zadatke i sarađujte sa članovima vašeg tima"
-                className="text-center hover:transform hover:scale-105 transition-transform duration-300"
-              />
-    
-              <IconCard
-                icon={<ReportIcon />}
-                title="Izveštaji"
-                text="Kreirajte detaljne izveštaje o vašoj produktivnosti i napretku"
-                className="text-center hover:transform hover:scale-105 transition-transform duration-300"
-              /> */}
+                />
             </div>
+
+            {/* Desna strana - kontejner sa više prostora */}
+            <div className="bg-white rounded-xl shadow-lg p-8 flex-1">
+                <h2 className="text-2xl font-semibold text-gray-800 text-center mb-6">Brza Lista Zadataka</h2>
+                <div className="space-y-4 flex-col">
+                    <Task
+                    title="Zadatak 1: Planiranje sastanka"
+                    description="Organizujte sastanak sa timom za sledeću nedelju."
+                    status="u toku"
+                    onComplete={() => alert('Task 1 označen kao završen!')}
+                    />
+                    <Task
+                    title="Zadatak 2: Priprema izveštaja"
+                    description="Pripremite kvartalni izveštaj za menadžment."
+                    status="završeno"
+                    />
+                    <Task
+                    title="Zadatak 3: Analiza podataka"
+                    description="Analizirajte podatke za poslednji kvartal."
+                    status="u toku"
+                    onComplete={() => alert('Task 3 označen kao završen!')}
+                    />
+                </div>
+            </div>
+        </div>
 
           </main>
         </div>
