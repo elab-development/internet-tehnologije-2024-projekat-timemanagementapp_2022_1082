@@ -5,7 +5,7 @@ import IconCard from '../../components/IconCard';
 import AnimatedWave from '../../components/AnimatedWave';
 import Task from '@/components/Task';
 
-const Home: React.FC = () => {
+const HomePage: React.FC = () => {
   // SVG ikonice
   const CalendarIcon = () => (
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-10 h-10 mb-2">
@@ -157,7 +157,7 @@ const Home: React.FC = () => {
                 <IconCard
                 icon={<CalendarIcon />}
                 title="Kalendar"
-                text="Efikasno planirajte svoje vreme i zadatke u intuitivnom kalendaru."
+                text="Efikasno planirajte svoje vreme i zadatke u intuitivnom kalendaru"
                 className="text-center hover:transform hover:scale-105 transition-transform duration-300"
                 />
                 <IconCard
@@ -169,8 +169,8 @@ const Home: React.FC = () => {
             </div>
 
             {/* Desna strana - kontejner sa više prostora */}
-            <div className="bg-white rounded-xl shadow-lg p-8 flex-1">
-                <h2 className="text-2xl font-semibold text-gray-800 text-center mb-6">Brza Lista Zadataka</h2>
+            <div className="bg-white rounded-xl shadow-lg p-4 flex-1">
+                <h2 className="text-2xl font-semibold text-gray-800 text-center mb-4">Brza Lista Zadataka</h2>
                 <div className="space-y-4 flex-col">
                     <Task
                     title="Zadatak 1: Planiranje sastanka"
@@ -183,12 +183,6 @@ const Home: React.FC = () => {
                     description="Pripremite kvartalni izveštaj za menadžment."
                     status="završeno"
                     />
-                    <Task
-                    title="Zadatak 3: Analiza podataka"
-                    description="Analizirajte podatke za poslednji kvartal."
-                    status="u toku"
-                    onComplete={() => alert('Task 3 označen kao završen!')}
-                    />
                 </div>
             </div>
         </div>
@@ -198,4 +192,4 @@ const Home: React.FC = () => {
       );
 };
 
-export default Home;
+export default HomePage;

@@ -2,7 +2,7 @@ import './globals.css';  // Importuj globalne stilove
 import { ReactNode } from 'react';
 
 export const metadata = {
-  title: 'Moja Platforma za Upravljanje Vremenom',
+  title: 'TimeFlow',
   description: 'Platforma za praćenje i upravljanje vremenom.',
 };
 
