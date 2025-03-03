@@ -26,11 +26,10 @@ const HomePage: React.FC = () => {
     </svg>
   );
 
-  // Linkovi za vertikalnu navigaciju
   const navLinks = [
     { text: "Početna", href: "/home" },
-    { text: "Zadaci", href: "/tasks" },
     { text: "Kalendar", href: "/calendar" },
+    { text: "Zadaci", href: "/tasks" },
     { text: "Analitika", href: "/stats" },
   ];
 
@@ -38,29 +37,28 @@ const HomePage: React.FC = () => {
   const [selectedSize, setSelectedSize] = useState(28);
   const [selectedSpeed, setSelectedSpeed] = useState(1000);
 
-    // Stanja za animaciju
-    const [progress1, setProgress1] = useState(0); // Završeni zadaci (0% do 50%)
-    const [progress2, setProgress2] = useState(0); // Produktivnost (0% do 78%)
-    const [count, setCount] = useState(0); // Brojač od 0 do 23
+
+    const [progress1, setProgress1] = useState(0);
+    const [progress2, setProgress2] = useState(0);
+    const [count, setCount] = useState(0);
   
-    // Efekti za animaciju
+
     useEffect(() => {
-      // Animacija za prvi loader (Završeni zadaci)
+
       const interval1 = setInterval(() => {
         setProgress1((prev) => (prev < 50 ? prev + 1 : prev));
-      }, 30); // Brzina animacije
+      }, 30);
   
-      // Animacija za drugi loader (Produktivnost)
+
       const interval2 = setInterval(() => {
         setProgress2((prev) => (prev < 78 ? prev + 1 : prev));
-      }, 20); // Brzina animacije
-  
-      // Animacija za brojač (0 do 23)
+      }, 20);
+
+
       const interval3 = setInterval(() => {
         setCount((prev) => (prev < 23 ? prev + 1 : prev));
-      }, 80); // Brzina animacije
+      }, 80); 
   
-      // Čišćenje intervala
       return () => {
         clearInterval(interval1);
         clearInterval(interval2);
@@ -69,9 +67,9 @@ const HomePage: React.FC = () => {
     }, []);
 
     return (
-        <div className="flex min-h-screen rounded-2xl bg-gradient-to-br from-gray-50 to-gray-100">
+        <div className="flex min-h-screen rounded-2xl bg-gradient-to-br from-gray-200 to-gray-300">
           {/* Vertikalni NavBar - leva strana */}
-          <aside className="w-64 bg-white shadow-lg rounded-r-2xl">
+          <aside className="w-54 bg-white shadow-lg rounded-r-2xl">
             <div className="p-6">
               <h1 className="text-2xl text-center font-bold text-blue-600">TimeFlow</h1>
             </div>
@@ -92,9 +90,11 @@ const HomePage: React.FC = () => {
           </aside>
     
           {/* Glavni sadržaj - desna strana */}
-          <main className="flex-1 p-8">
+          <main className="flex-1 p-6 pt-2">
             <div className="flex flex-row justify-center items-center space-x-1">
-              <h2 className="text-2xl font-semibold text-gray-800">Dobrodošo/la [Ime korisnika]</h2>
+            <h2 className="text-2xl font-semibold text-gray-800">
+              Dobrodošo/la u <span className="text-3xl text-blue-600">TimeFlow</span>
+            </h2>
               <div className="">
                 <AnimatedWave emoji={selectedEmoji} size={selectedSize} wavingSpeed={selectedSpeed} />
               </div>
@@ -141,7 +141,6 @@ const HomePage: React.FC = () => {
                         </div>
                         <div className="flex items-center justify-between">
                         <span className="text-xs text-gray-500">0%</span>
-                        <span className="text-xs text-gray-500">78%</span>
                         <span className="text-xs text-gray-500">100%</span>
                         </div>
                     </div>
@@ -151,41 +150,41 @@ const HomePage: React.FC = () => {
               </div>
             </div>
     
-        <div className="flex flex-col md:flex-row gap-6 mb-2">
-        {/* Leva strana - dve kartice sa manjom širinom */}
-            <div className="grid grid-rows-1 md:grid-rows-2 gap-6 max-w-[260px] max-h-[400px]"> {/* Ograničena širina */}
-                <IconCard
-                icon={<CalendarIcon />}
-                title="Kalendar"
-                text="Efikasno planirajte svoje vreme i zadatke u intuitivnom kalendaru"
-                className="text-center hover:transform hover:scale-105 transition-transform duration-300"
-                />
-                <IconCard
-                icon={<NotesIcon />}
-                title="TODO Lista"
-                text="Organizujte svoje zadatke i ideje na jednom mestu."
-                className="text-center hover:transform hover:scale-105 transition-transform duration-300"
-                />
-            </div>
+            <div className="flex flex-col md:flex-row gap-6 mb-2">
+          {/* Leva strana - dve kartice sa manjom širinom */}
+              <div className="grid grid-rows-1 md:grid-rows-2 gap-6 max-w-[260px] max-h-[400px]">
+                  <IconCard
+                  icon={<CalendarIcon />}
+                  title="Kalendar"
+                  text="Efikasno planirajte svoje vreme i zadatke u intuitivnom kalendaru"
+                  className="text-center hover:transform hover:scale-105 transition-transform duration-300"
+                  />
+                  <IconCard
+                  icon={<NotesIcon />}
+                  title="TODO Lista"
+                  text="Organizujte svoje zadatke i ideje na jednom mestu."
+                  className="text-center hover:transform hover:scale-105 transition-transform duration-300"
+                  />
+              </div>
 
             {/* Desna strana - kontejner sa više prostora */}
-            <div className="bg-white rounded-xl shadow-lg p-4 flex-1">
-                <h2 className="text-2xl font-semibold text-gray-800 text-center mb-4">Brza Lista Zadataka</h2>
-                <div className="space-y-4 flex-col">
-                    <Task
-                    title="Zadatak 1: Planiranje sastanka"
-                    description="Organizujte sastanak sa timom za sledeću nedelju."
-                    status="u toku"
-                    onComplete={() => alert('Task 1 označen kao završen!')}
-                    />
-                    <Task
-                    title="Zadatak 2: Priprema izveštaja"
-                    description="Pripremite kvartalni izveštaj za menadžment."
-                    status="završeno"
-                    />
-                </div>
-            </div>
-        </div>
+              <div className="bg-white rounded-xl shadow-lg p-4 flex-1">
+                  <h2 className="text-2xl font-semibold text-gray-800 text-center mb-4">Brza Lista Zadataka</h2>
+                  <div className="space-y-4 flex-col">
+                      <Task
+                      title="Zadatak 1: Planiranje sastanka"
+                      description="Organizujte sastanak sa timom za sledeću nedelju."
+                      status="u toku"
+                      onComplete={() => alert('Task 1 označen kao završen!')}
+                      />
+                      <Task
+                      title="Zadatak 2: Priprema izveštaja"
+                      description="Pripremite kvartalni izveštaj za menadžment."
+                      status="završeno"
+                      />
+                  </div>
+              </div>
+          </div>
 
           </main>
         </div>
