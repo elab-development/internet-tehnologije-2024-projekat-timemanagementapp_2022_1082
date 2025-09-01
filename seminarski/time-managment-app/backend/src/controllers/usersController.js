@@ -35,3 +35,29 @@ export async function createUser(req, res) {
     res.status(500).json({ message: "Internal server error" });
   }
 }
+
+// DELETE user (samo admin)
+export async function deleteUser(req, res) {
+  try {
+    const { id } = req.params;
+
+    if (!id) {
+      return res.status(400).json({ error: "User ID is required" });
+    }
+
+    const { rowCount } = await pool.query(
+      "DELETE FROM users WHERE id = $1",
+      [id]
+    );
+
+    if (rowCount === 0) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    res.status(204).send(); // 204 No Content → uspešno obrisano
+  } catch (error) {
+    console.error("Error deleting user:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+}
+

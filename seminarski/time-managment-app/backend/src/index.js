@@ -4,6 +4,7 @@ import cors from "cors";
 import { verifyConnection } from "./config/db.js";
 
 import tasksRouter from "./routes/tasksRoute.js";
+import usersRouter from "./routes/usersRoute.js";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -11,6 +12,7 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
+// Health check
 app.get("/api/health", async (req, res) => {
   try {
     const now = await verifyConnection();
@@ -20,7 +22,9 @@ app.get("/api/health", async (req, res) => {
   }
 });
 
+// Routes
 app.use("/api/tasks", tasksRouter);
+app.use("/api/users", usersRouter);
 
 app.listen(PORT, () => {
   console.log("Database runned successfully!");
