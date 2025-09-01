@@ -4,7 +4,6 @@ import React from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 
-// Variants for dot animations
 const dotVariants = {
   hidden: { opacity: 0, scale: 0.5 },
   visible: { opacity: 0.5, scale: 1 },
@@ -13,7 +12,6 @@ const dotVariants = {
 const Home: React.FC = () => {
   return (
     <div className="relative flex flex-col rounded-2xl items-center justify-center min-h-screen bg-gradient-to-b from-blue-50 to-white overflow-hidden">
-      {/* Predefined blue dots */}
       {[
         { className: "bg-blue-400 w-6 h-6 top-150 left-160", delay: 0.1 },
         { className: "bg-blue-700 w-4 h-4 top-40 left-60", delay: 0.2 },

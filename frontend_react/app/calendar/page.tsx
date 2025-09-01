@@ -27,17 +27,14 @@ const Calendar: React.FC = () => {
     setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1));
   };
 
-  // Helper function to get days in month
   const getDaysInMonth = (year: number, month: number): number => {
     return new Date(year, month + 1, 0).getDate();
   };
 
-  // Helper function to get day of week (0-6) for first day of month
   const getFirstDayOfMonth = (year: number, month: number): number => {
     return new Date(year, month, 1).getDay();
   };
 
-  // Generate calendar days
   const generateCalendarDays = (): React.ReactNode[] => {
     const year = currentDate.getFullYear();
     const month = currentDate.getMonth();
@@ -46,7 +43,7 @@ const Calendar: React.FC = () => {
     
     const days: React.ReactNode[] = [];
     
-    // Prazna polja za dane iz prethodnog meseca
+
     for (let i = 0; i < firstDayOfMonth; i++) {
       days.push(
         <div 
@@ -56,7 +53,6 @@ const Calendar: React.FC = () => {
       );
     }
     
-    // Brojevi dana za trenutni mesec
     for (let day = 1; day <= daysInMonth; day++) {
       const date = new Date(year, month, day);
       const isSelected = selectedDate && 
@@ -83,7 +79,6 @@ const Calendar: React.FC = () => {
     return days;
   };
 
-  // Get month name
   const getMonthName = (): string => {
     return currentDate.toLocaleString('sr-Latn', { month: 'long' });
   };
@@ -138,7 +133,6 @@ const Calendar: React.FC = () => {
             </button>
           </div>
           
-          {/* Calendar Weekdays */}
           <div className="grid grid-cols-7 mb-2 border-b pb-2">
             {['Ned', 'Pon', 'Uto', 'Sre', 'Čet', 'Pet', 'Sub'].map((day, i) => (
               <div 
@@ -150,12 +144,10 @@ const Calendar: React.FC = () => {
             ))}
           </div>
           
-          {/* Calendar Days */}
           <div className="grid grid-cols-7 text-center">
             {generateCalendarDays()}
           </div>
           
-          {/* Selected Date Info */}
           {selectedDate && (
             <div className="mt-2 p-2 border-t border-gray-200 bg-gray-200 rounded-lg">
               <p className="text-sm text-center text-gray-700 font-medium">

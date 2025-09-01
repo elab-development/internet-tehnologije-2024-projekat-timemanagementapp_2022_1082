@@ -1,4 +1,4 @@
-import './globals.css';  // Importuj globalne stilove
+import './globals.css';
 import { ReactNode } from 'react';
 
 
