@@ -1,9 +1,9 @@
-require("dotenv").config();
-const express = require("express");
-const cors = require("cors");
-const { verifyConnection } = require("./db");
+import "dotenv/config";
+import express from "express";
+import cors from "cors";
+import { verifyConnection } from "./config/db.js";
 
-const tasksRouter = require("./routes/task");
+import tasksRouter from "./routes/tasksRoute.js";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -11,7 +11,6 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
-// Health check
 app.get("/api/health", async (req, res) => {
   try {
     const now = await verifyConnection();
@@ -21,10 +20,9 @@ app.get("/api/health", async (req, res) => {
   }
 });
 
-// Routes
 app.use("/api/tasks", tasksRouter);
 
-// Start server
 app.listen(PORT, () => {
+  console.log("Database runned successfully!");
   console.log(`API listening on http://localhost:${PORT}`);
 });
