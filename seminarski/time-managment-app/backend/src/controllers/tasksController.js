@@ -4,7 +4,7 @@ import { pool } from "../config/db.js";
 export async function getAllTasks(req, res) {
   try {
     const { rows } = await pool.query(
-      "SELECT id, title, type, created_at, finished_at, complete, updated_at FROM tasks ORDER BY created_at DESC"
+      "SELECT id, title, type, created_at, finished_at, complete, updated_at, content FROM tasks ORDER BY created_at DESC"
     );
     res.status(200).json(rows);
   } catch (error) {
@@ -32,17 +32,17 @@ export async function getTaskById(req, res) {
 // Create task
 export async function createTask(req, res) {
   try {
-    const { title, type = "normal", finishedAt = null, complete = false } = req.body;
+    const { title, type = "normal", finishedAt = null, complete = false, content = "" } = req.body;
 
     if (!title || typeof title !== "string") {
       return res.status(400).json({ error: "Title is required and must be a string" });
     }
 
     const { rows } = await pool.query(
-      `INSERT INTO tasks (title, type, created_at, finished_at, complete)
-       VALUES ($1, $2, NOW(), $3, $4)
-       RETURNING id, title, type, created_at, finished_at, complete, updated_at;`,
-      [title, type, finishedAt, complete]
+      `INSERT INTO tasks (title, type, created_at, finished_at, complete, content)
+       VALUES ($1, $2, NOW(), $3, $4, $5)
+       RETURNING id, title, type, created_at, finished_at, complete, updated_at, content;`,
+      [title, type, finishedAt, complete, content]
     );
 
     res.status(201).json(rows[0]);
@@ -56,7 +56,7 @@ export async function createTask(req, res) {
 export async function updateTask(req, res) {
   try {
     const { id } = req.params;
-    const { title, type, createdAt, finishedAt, complete } = req.body;
+    const { title, type, createdAt, finishedAt, complete, content } = req.body;
 
     const { rows } = await pool.query(
       `UPDATE tasks
@@ -66,17 +66,18 @@ export async function updateTask(req, res) {
          created_at = COALESCE($3, created_at),
          finished_at = $4,
          complete = COALESCE($5, complete),
+         content = COALESCE($6, content),
          updated_at = NOW()
-       WHERE id = $6
-       RETURNING id, title, type, created_at, finished_at, complete, updated_at`,
-      [title ?? null, type ?? null, createdAt ?? null, finishedAt ?? null, complete ?? null, id]
+       WHERE id = $7
+       RETURNING id, title, type, created_at, finished_at, complete, updated_at, content;`,
+      [title ?? null, type ?? null, createdAt ?? null, finishedAt ?? null, complete ?? null, content ?? null, id]
     );
 
     if (rows.length === 0) return res.status(404).json({ error: "Task not found" });
     res.status(200).json(rows[0]);
   } catch (error) {
-    console.error("Error updating task:", error);
-    res.status(500).json({ message: "Internal server error" });
+      console.error("Error updating task:", error);
+      res.status(500).json({ message: "Internal server error" });
   }
 }
 

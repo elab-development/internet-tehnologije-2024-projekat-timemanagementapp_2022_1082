@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import LeftSidebar from './LeftSidebar';
 import Form from './Form';
 import { taskAPI, healthCheck } from '../services/api';
+import { CSVLink } from "react-csv";
 
 const Dashboard = () => {
   const [forms, setForms] = useState([]);               // ucitavanje svih taskova sa backenda
@@ -9,6 +10,17 @@ const Dashboard = () => {
   const [loading, setLoading] = useState(true);         // da li se trenutno taskovi ucitavaju
   const [error, setError] = useState(null);               // pamti greske ako dodje do problema sa APIjem
   const [backendStatus, setBackendStatus] = useState('checking');   // status veze sa backendom > "checking", "connected", "disconnected"
+
+  // Definicija CSV kolona
+  const csvHeaders = [
+    { label: "ID", key: "id" },
+    { label: "Title", key: "title" },
+    { label: "Type", key: "type" },
+    { label: "Created At", key: "createdAt" },
+    { label: "Finished At", key: "finishedAt" },
+    { label: "Complete", key: "complete" },
+    { label: "Content", key: "content" }
+  ];
 
   // Učitaj task-ove pri pokretanju komponente i proverava da li backend radi 
   useEffect(() => {
@@ -44,7 +56,7 @@ const Dashboard = () => {
         createdAt: task.created_at ? task.created_at.split('T')[0] : '',
         finishedAt: task.finished_at ? task.finished_at.split('T')[0] : '',
         complete: task.complete || false,
-        content: task.content || '' // dodaj content u bazu kasnije ili samo obrisi 
+        content: task.content || ''
       }));
       
       setForms(convertedTasks); 
@@ -68,7 +80,8 @@ const Dashboard = () => {
       const newTaskData = {
         title: 'New Task',
         type: 'normal',
-        complete: false
+        complete: false,
+        content: 'Description of your task'
       };
       
       const createdTask = await taskAPI.createTask(newTaskData);
@@ -122,7 +135,8 @@ const Dashboard = () => {
         type: updatedData.type,
         createdAt: updatedData.createdAt || null,
         finishedAt: updatedData.finishedAt || null,
-        complete: updatedData.complete
+        complete: updatedData.complete,
+        content: updatedData.content || "" 
       };
       
       const updatedTask = await taskAPI.updateTask(taskId, backendData);
@@ -204,15 +218,30 @@ const Dashboard = () => {
                   </button>
                 </div>
               ) : (
-                <div className="space-y-6">
-                  {forms.map((formData) => (
-                    <Form 
-                      key={formData.id}
-                      formData={formData}
-                      onUpdate={(updatedData) => updateTask(formData.id, updatedData)}
-                      onRemove={() => removeTask(formData.id)}
-                    />
-                  ))}
+                <div>
+                    {/* CSV export dugme */}
+                  <div className="mb-4 flex justify-end">
+                    <CSVLink
+                      data={forms}
+                      headers={csvHeaders}
+                      filename={`tasks_export_${new Date().toISOString().split('T')[0]}.csv`}
+                      className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition-colors"
+                    >
+                      Export Tasks to CSV
+                    </CSVLink>
+                  </div>
+                    {/* lista taskova */}
+                  <div className="space-y-6">   
+                    {forms.map((formData) => (
+                      <Form 
+                        key={formData.id}
+                        formData={formData}
+                        onUpdate={(updatedData) => updateTask(formData.id, updatedData)}
+                        onRemove={() => removeTask(formData.id)}
+                      />
+                    ))}
+                  </div>
+
                 </div>
               )}
             </div>
