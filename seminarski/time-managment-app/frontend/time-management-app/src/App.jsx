@@ -1,6 +1,6 @@
 import React from 'react';
 import { ClerkProvider, SignedIn, SignedOut, SignIn } from '@clerk/clerk-react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 import Dashboard from './components/Dashboard';
 import './App.css';
 

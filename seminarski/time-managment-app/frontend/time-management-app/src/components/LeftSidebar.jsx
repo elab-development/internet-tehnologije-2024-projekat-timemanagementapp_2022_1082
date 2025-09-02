@@ -20,29 +20,32 @@ function LeftSidebar({
       <div className="p-4 border-b border-gray-200">
         <div className="flex items-center space-x-3">
           <div className="w-10 h-10 bg-blue-500 rounded-lg flex items-center justify-center overflow-hidden">
-            {user?.profileImageUrl ? (
+            {user?.imageUrl ? (
               <img 
-                src={user.profileImageUrl} 
+                src={user.imageUrl} 
                 alt="avatar" 
                 className="w-full h-full object-cover"
               />
             ) : (
               <span className="text-white text-lg font-bold">
-                {user?.firstName?.charAt(0) || user?.emailAddresses[0]?.emailAddress?.charAt(0) || 'U'}
+                {user?.firstName?.charAt(0) || 
+                user?.primaryEmailAddress?.emailAddress?.charAt(0) || 
+                'U'}
               </span>
             )}
           </div>
+
           <div>
             <h2 className="font-semibold text-gray-900">
-              {user?.firstName && user?.lastName 
-                ? `${user.firstName} ${user.lastName}`
-                : user?.fullName || 'User'
-              }
+              {user?.firstName || 
+              user?.primaryEmailAddress?.emailAddress?.split('@')[0] || 
+              'User'}
             </h2>
             <p className="text-sm text-gray-500">
-              {user?.emailAddresses?.[0]?.emailAddress || 'No email'}
+              {user?.primaryEmailAddress?.emailAddress || 'No email'}
             </p>
           </div>
+
         </div>
       </div>
 
