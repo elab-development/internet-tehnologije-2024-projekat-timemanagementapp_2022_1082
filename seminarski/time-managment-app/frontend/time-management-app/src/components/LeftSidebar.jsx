@@ -1,8 +1,12 @@
 import React from 'react';
 import { useUser, useClerk } from '@clerk/clerk-react';
-import avatar from '../assets/avatar.jpg'
 
-function LeftSidebar({ onAddTask, onViewChange, activeView }) {
+function LeftSidebar({ 
+  onAddTask, 
+  onViewChange, 
+  activeView, 
+  backendStatus 
+}) {
   const { user } = useUser();
   const { signOut } = useClerk();
 
@@ -18,8 +22,8 @@ function LeftSidebar({ onAddTask, onViewChange, activeView }) {
           <div className="w-10 h-10 bg-blue-500 rounded-lg flex items-center justify-center overflow-hidden">
             {user?.profileImageUrl ? (
               <img 
-                src={user.avatar} 
-                alt="Profile" 
+                src={user.profileImageUrl} 
+                alt="avatar" 
                 className="w-full h-full object-cover"
               />
             ) : (
@@ -102,6 +106,26 @@ function LeftSidebar({ onAddTask, onViewChange, activeView }) {
 
       {/* Bottom sekcija */}
       <div className="mt-auto px-4 py-4 border-t border-gray-200">
+        {/* Backend status indicator */}
+        <div className={`flex items-center space-x-2 px-2 py-2 rounded mb-2 text-xs ${
+          backendStatus === 'connected' 
+            ? 'bg-green-100 text-green-700' 
+            : backendStatus === 'checking'
+            ? 'bg-yellow-100 text-yellow-700'
+            : 'bg-red-100 text-red-700'
+        }`}>
+          <span>
+            {backendStatus === 'connected' && '✅'}
+            {backendStatus === 'checking' && '🔄'}
+            {backendStatus === 'disconnected' && '❌'}
+          </span>
+          <span>
+            {backendStatus === 'connected' && 'Database Connected'}
+            {backendStatus === 'checking' && 'Connecting...'}
+            {backendStatus === 'disconnected' && 'Offline Mode'}
+          </span>
+        </div>
+
         <div className="flex items-center space-x-3 px-2 py-2 text-gray-600 hover:bg-gray-100 rounded cursor-pointer mb-1 transition-colors">
           <span className="text-sm">👥</span>
           <span className="text-sm">User info</span>
