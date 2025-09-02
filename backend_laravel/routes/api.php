@@ -48,7 +48,7 @@ Route::middleware('auth:sanctum')->group(function () {
         // Nested routes
         Route::get('users/{user}/tasks', [TaskController::class, 'tasksByUser']);
         Route::get('users/{user}/time-entries', [TimeEntryController::class, 'timeEntriesByUser']);
-        Route::get('categories/{category}/tasks', [TaskController::class, 'tasksByCategory']);
+        Route::get('categories/{category}/tasks', [CategoryController::class, 'tasksByCategory']);
         Route::get('tasks/{task}/time-entries', [TimeEntryController::class, 'timeEntriesByTask']);
     });
     

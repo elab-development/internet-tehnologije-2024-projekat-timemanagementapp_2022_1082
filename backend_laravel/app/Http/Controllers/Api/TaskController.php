@@ -47,4 +47,13 @@ class TaskController extends Controller
 
         return response()->json(null, 204);
     }
+
+    public function tasksByUser($userId)
+    {
+        // Uzmi sve taskove gde je user_id = $userId
+        $tasks = \App\Models\Task::where('user_id', $userId)->get();
+
+        return response()->json($tasks);
+    }
+
 }

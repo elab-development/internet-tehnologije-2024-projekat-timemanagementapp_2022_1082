@@ -44,4 +44,14 @@ class CategoryController extends Controller
 
         return response()->json(null, 204);
     }
+
+    public function tasksByCategory($categoryId)
+    {
+        $category = Category::with('tasks')->findOrFail($categoryId);
+
+        return response()->json([
+            'category' => $category->only(['id', 'name']),
+            'tasks' => $category->tasks
+        ]);
+    }
 }
