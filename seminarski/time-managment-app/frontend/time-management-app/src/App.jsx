@@ -61,7 +61,7 @@ const appearance = {
       fontWeight: '500',
       marginBottom: '6px'
     },
-    // Glavni submit dugme
+    // Glavno submit dugme
     formButtonPrimary: {
       backgroundColor: '#3b82f6',
       color: '#ffffff',

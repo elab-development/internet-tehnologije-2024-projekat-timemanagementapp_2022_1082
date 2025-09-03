@@ -5,6 +5,7 @@ import { verifyConnection } from "./config/db.js";
 
 import tasksRouter from "./routes/tasksRoute.js";
 import usersRouter from "./routes/usersRoute.js";
+import userInfoRouter from "./routes/userInfoRoute.js";
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -25,6 +26,7 @@ app.get("/api/health", async (req, res) => {
 // Routes
 app.use("/api/tasks", tasksRouter);
 app.use("/api/users", usersRouter);
+app.use("/api/user-info", userInfoRouter);
 
 app.listen(PORT, () => {
   console.log("Database runned successfully!");

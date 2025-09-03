@@ -49,7 +49,7 @@ function LeftSidebar({
         </div>
       </div>
 
-      {/* Navigation menu */}
+      {/* Navigacija */}
       <div className="px-4 py-2">
         {/* Add New Task */}
         <button 
@@ -67,7 +67,7 @@ function LeftSidebar({
       <div className="px-4 mt-4">
         <h3 className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-2">WORKSPACE</h3>
         
-        {/* Home - aktivna */}
+        {/* Home */}
         <div 
           onClick={() => onViewChange('home')}
           className={`flex items-center space-x-3 px-2 py-2 rounded mb-1 cursor-pointer transition-colors ${
@@ -129,12 +129,28 @@ function LeftSidebar({
           </span>
         </div>
 
-        <div className="flex items-center space-x-3 px-2 py-2 text-gray-600 hover:bg-gray-100 rounded cursor-pointer mb-1 transition-colors">
+        {/* User Info */}
+        <div 
+          onClick={() => onViewChange('userinfo')}
+          className={`flex items-center space-x-3 px-2 py-2 rounded cursor-pointer mb-1 transition-colors ${
+            activeView === 'userinfo'
+              ? 'bg-blue-100 text-blue-700'
+              : 'text-gray-600 hover:bg-gray-100'
+          }`}
+        >
           <span className="text-sm">👥</span>
           <span className="text-sm">User info</span>
         </div>
 
-        <div className="flex items-center space-x-3 px-2 py-2 text-gray-600 hover:bg-gray-100 rounded cursor-pointer mb-1 transition-colors">
+        {/* Trash */}
+        <div 
+          onClick={() => onViewChange('trash')}
+          className={`flex items-center space-x-3 px-2 py-2 rounded cursor-pointer mb-1 transition-colors ${
+            activeView === 'trash'
+              ? 'bg-blue-100 text-blue-700'
+              : 'text-gray-600 hover:bg-gray-100'
+          }`}
+        >
           <span className="text-sm">🗑️</span>
           <span className="text-sm">Trash</span>
         </div>
