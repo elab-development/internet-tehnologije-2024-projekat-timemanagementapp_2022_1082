@@ -151,7 +151,7 @@ const HomePage: React.FC = () => {
             </div>
     
             <div className="flex flex-col md:flex-row gap-6 mb-2">
-          {/* Leva strana - dve kartice sa manjom širinom */}
+          {/* Leva strana */}
               <div className="grid grid-rows-1 md:grid-rows-2 gap-6 max-w-[260px] max-h-[400px]">
                   <IconCard
                   icon={<CalendarIcon />}
@@ -167,7 +167,7 @@ const HomePage: React.FC = () => {
                   />
               </div>
 
-            {/* Desna strana - kontejner sa više prostora */}
+            {/* Desna strana */}
               <div className="bg-white rounded-xl shadow-lg p-4 flex-1">
                   <h2 className="text-2xl font-semibold text-gray-800 text-center mb-4">Brza Lista Zadataka</h2>
                   <div className="space-y-4 flex-col">

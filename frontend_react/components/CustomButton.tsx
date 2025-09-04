@@ -11,7 +11,7 @@ interface CustomButtonProps {
   disabled?: boolean;
   type?: 'button' | 'submit' | 'reset';
   className?: string;
-  children?: ReactNode; // Dodato svojstvo za decu komponentu
+  children?: ReactNode;
 }
 
 const CustomButton: React.FC<CustomButtonProps> = ({
@@ -23,7 +23,7 @@ const CustomButton: React.FC<CustomButtonProps> = ({
   disabled = false,
   type = 'button',
   className = '',
-  children, // Dodato svojstvo za decu komponentu
+  children,
 }) => {
   // Mapiranje boja - regularno i za tamnu temu
   const colorClasses = {

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 
 interface WavingHandProps {
-  wavingSpeed?: number; // Time for one wave motion in milliseconds
-  emoji?: string; // Allows different hand emoji options
-  size?: number; // Controls the font size
+  wavingSpeed?: number;
+  emoji?: string;
+  size?: number;
 }
 
 const WavingHand: React.FC<WavingHandProps> = ({
@@ -17,7 +17,6 @@ const WavingHand: React.FC<WavingHandProps> = ({
   useEffect(() => {
     const interval = setInterval(() => {
       setRotation(prev => {
-        // Reverse direction at extremes
         if (prev >= 30) {
           setDirection(-1);
         } else if (prev <= -10) {
