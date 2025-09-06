@@ -7,10 +7,10 @@ import { taskAPI, healthCheck } from '../services/api';
 import { CSVLink } from "react-csv";
 
 const Dashboard = () => {
-  const [forms, setForms] = useState([]);               // ucitavanje svih taskova sa backenda
-  const [trashedTasks, setTrashedTasks] = useState([]); // state za trash taskove
+  const [forms, setForms] = useState([]);                 // ucitavanje svih taskova sa backenda
+  const [trashedTasks, setTrashedTasks] = useState([]);   // state za trash taskove
   const [activeView, setActiveView] = useState('home');   // koja sekcija je aktivna, po defaultu home 
-  const [loading, setLoading] = useState(true);         // da li se trenutno taskovi ucitavaju
+  const [loading, setLoading] = useState(true);           // da li se trenutno taskovi ucitavaju
   const [error, setError] = useState(null);               // pamti greske ako dodje do problema sa APIjem
   const [backendStatus, setBackendStatus] = useState('checking');   // status veze sa backendom > "checking", "connected", "disconnected" 
 
