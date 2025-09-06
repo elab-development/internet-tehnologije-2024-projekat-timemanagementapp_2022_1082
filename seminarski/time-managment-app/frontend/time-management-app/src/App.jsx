@@ -1,6 +1,6 @@
 import React from 'react';
-import { ClerkProvider, SignedIn, SignedOut, SignIn } from '@clerk/clerk-react';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { ClerkProvider, SignedIn, SignedOut, SignIn, SignUp } from '@clerk/clerk-react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Dashboard from './components/Dashboard';
 import './App.css';
 
@@ -130,13 +130,40 @@ function App() {
             <Dashboard />
           </SignedIn>
           <SignedOut>
-            <div className="min-h-screen bg-white flex items-center justify-center p-6">
-              <SignIn 
-                appearance={appearance}
-                redirectUrl="/"
-                signUpUrl="/sign-up"
+            <Routes>
+              <Route 
+                path="/sign-in" 
+                element={
+                  <div className="min-h-screen bg-white flex items-center justify-center p-6">
+                    <SignIn 
+                      appearance={appearance}
+                      redirectUrl="/"
+                      signUpUrl="/sign-up"
+                    />
+                  </div>
+                } 
               />
-            </div>
+              <Route 
+                path="/sign-up" 
+                element={
+                  <div className="min-h-screen bg-white flex items-center justify-center p-6">
+                    <SignUp 
+                      appearance={appearance}
+                      redirectUrl="/"
+                      signInUrl="/sign-in"
+                    />
+                  </div>
+                } 
+              />
+              <Route 
+                path="/" 
+                element={<Navigate to="/sign-in" replace />} 
+              />
+              <Route 
+                path="*" 
+                element={<Navigate to="/sign-in" replace />} 
+              />
+            </Routes>
           </SignedOut>
         </div>
       </Router>

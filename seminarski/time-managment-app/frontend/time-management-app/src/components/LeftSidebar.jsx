@@ -11,7 +11,9 @@ function LeftSidebar({
   const { signOut } = useClerk();
 
   const handleSignOut = () => {
-    signOut();
+    if (window.confirm('Are you sure you want to log out?')) {
+      signOut();
+    }
   };
 
   return (
